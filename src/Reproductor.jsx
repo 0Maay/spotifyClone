@@ -1,20 +1,36 @@
-import { useAudio } from 'react-use';
-import styles from './Reproductor.module.css';
+import {useContext} from "react"
+import { useAudio } from "react-use"
+import styles from './Reproductor.module.css'
+import PlayArrowIcon from '@material-ui/icons/PlayArrow'
+import PauseIcon from '@material-ui/icons/Pause'
+import {currentSongContext} from "./context/currentSongContext"
 
-const Reproductor = ({ source, name, album }) => {
+const Reproductor = () => {
+	const {
+		currentSong: { previewURL, name },
+	} = useContext(currentSongContext)
+
 	const [ audio, state, controls ] = useAudio({
-		src: source,
+		src: previewURL,
 		autoPlay: true
-	});
+	})
+
+    if (!name.length) {
+		return null;
+	}
 
 	return (
 		<div className={styles.reproductor}>
-			{audio}
-			<h2>
-				{name} - {album}
-			</h2>
-			<h3>time: {state.time}</h3>
 			<div>
+				{audio}
+				<h2>{name}</h2>
+			</div>
+		
+			<div>
+				<button className={styles.button} onClick={state.paused ? controls.play : controls.pause}>
+					{state.paused ? <PlayArrowIcon/> : <PauseIcon/>}
+				</button>
+				
 				<input
 					type="range"
 					value={state.volume}
@@ -23,9 +39,7 @@ const Reproductor = ({ source, name, album }) => {
 					max="1.0"
 					step="0.05"
 				/>
-				<button onClick={state.paused ? controls.play : controls.pause}>
-					{state.paused ? 'Play' : 'Pause'}
-				</button>
+				{state.time ? <h3>{state.time}</h3>: <h3>Loading...</h3>}
 			</div>
 		</div>
 	);

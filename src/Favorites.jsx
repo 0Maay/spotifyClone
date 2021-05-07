@@ -1,6 +1,10 @@
-import Song from './Song';
+import Song from './Song'
+import {useFavorites} from "./context/favoritesContext"
 
-const Home = ({ favoriteSongs }) => {
+
+const Favorites = () => {
+	const { favoriteSongs } = useFavorites()
+
 	return (
 		<main>
 			<h1>Favorite Songs</h1>
@@ -12,7 +16,7 @@ const Home = ({ favoriteSongs }) => {
 				}}
 			>
 				{favoriteSongs.length > 0 ? (
-					favoriteSongs.map((song) => <Song song={song} />)
+					favoriteSongs.map((song) => <Song key={song.id} song={song} />)
 				) : (
 					<h4>Empty favorite song list</h4>
 				)}
@@ -21,4 +25,4 @@ const Home = ({ favoriteSongs }) => {
 	);
 };
 
-export default Home;
+export default Favorites;

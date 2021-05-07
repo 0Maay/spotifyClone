@@ -1,28 +1,50 @@
-import randomColor from 'randomcolor';
-import styles from './Search.module.css';
+import { useContext } from "react"
+import { currentSongContext } from "./context/currentSongContext"
+import { useFavorites } from "./context/favoritesContext"
+import styles from './Search.module.css'
+import PlayArrowIcon from '@material-ui/icons/PlayArrow'
+import FavoriteIcon from '@material-ui/icons/Favorite'
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder'
 
-const Song = ({ song, setCurrentSong = () => {}, favoriteSongs, setFavoriteSongs }) => {
+
+const Song = ({ song }) => {
+	const { setCurrentSong } = useContext(currentSongContext);
+	const { favoriteSongs, setFavoriteSongs } = useFavorites();
+
 	const addToFavoriteSongs = () => {
-		console.log(song.id);
-		const exist = favoriteSongs.includes(song);
-
-		if (!exist) {
-			setFavoriteSongs([ ...favoriteSongs, song ]);
+		if (!favoriteSongs.includes(song)) {
+			setFavoriteSongs([...favoriteSongs, song]);
 		}
+		};
+	
+	const removeFromFavorites = () => {
+		setFavoriteSongs(favoriteSongs.filter((fs) => fs.id !== song.id));
 	};
 
+	
+	
 	return (
 		<div
 			className={styles.song}
 			style={{
-				backgroundColor: randomColor()
+				backgroundColor: song.colorBg
 			}}
 		>
-			<h3>
-				{song.name} - {song.albumName}
+			<h3 className={styles.title}>
+				{song.name}
 			</h3>
-			<button onClick={() => setCurrentSong(song)}>play</button>
-			<button onClick={addToFavoriteSongs}>favorite</button>
+			<h5>
+				{song.artistName}
+			</h5>
+			<div className={styles.buttons}>
+				<button className={styles.button} onClick={() => setCurrentSong(song)}><PlayArrowIcon/></button>
+				<button className={styles.button} 
+					onClick={ favoriteSongs.includes(song) ? removeFromFavorites : addToFavoriteSongs}>
+						{favoriteSongs.includes(song)
+						? <FavoriteIcon/>
+						:<FavoriteBorderIcon/>}
+				</button>
+			</div>
 		</div>
 	);
 };
