@@ -24,7 +24,6 @@ const Reproductor = () => {
 			<div>
 				{audio}
 				<h2>{name}</h2>
-				<h3></h3>
 			</div>
 		
 			<div>
