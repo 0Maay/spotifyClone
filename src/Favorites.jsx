@@ -1,7 +1,6 @@
 import Song from './Song'
 import {useFavorites} from "./context/favoritesContext"
 
-
 const Favorites = () => {
 	const { favoriteSongs } = useFavorites()
 
@@ -18,7 +17,7 @@ const Favorites = () => {
 				{favoriteSongs.length > 0 ? (
 					favoriteSongs.map((song) => <Song key={song.id} song={song} />)
 				) : (
-					<h4>Empty favorite song list</h4>
+					<p>You don't have favorite songs yet</p>
 				)}
 			</section>
 		</main>

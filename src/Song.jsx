@@ -19,9 +19,7 @@ const Song = ({ song }) => {
 	
 	const removeFromFavorites = () => {
 		setFavoriteSongs(favoriteSongs.filter((fs) => fs.id !== song.id));
-	};
-
-	
+	};	
 	
 	return (
 		<div
@@ -33,7 +31,7 @@ const Song = ({ song }) => {
 			<h3 className={styles.title}>
 				{song.name}
 			</h3>
-			<h5>
+			<h5 className={styles.subtitle}>
 				{song.artistName}
 			</h5>
 			<div className={styles.buttons}>

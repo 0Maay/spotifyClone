@@ -7,7 +7,7 @@ import {currentSongContext} from "./context/currentSongContext"
 
 const Reproductor = () => {
 	const {
-		currentSong: { previewURL, name },
+		currentSong: { previewURL, name},
 	} = useContext(currentSongContext)
 
 	const [ audio, state, controls ] = useAudio({
@@ -24,6 +24,7 @@ const Reproductor = () => {
 			<div>
 				{audio}
 				<h2>{name}</h2>
+				<h3></h3>
 			</div>
 		
 			<div>

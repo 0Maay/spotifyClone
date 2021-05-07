@@ -30,7 +30,7 @@ const Search = () => {
 
 	return (
 		<div>
-			<input className={styles.input} ref={queryRef} />
+			<input placeholder="My favorite song" className={styles.input} ref={queryRef} />
 			<button className={styles.button} onClick={search}><SearchIcon/></button>
 			<section className={styles.songsContainer}>
 				{songs.map((song, index) => (
