@@ -36,7 +36,11 @@ h5{
 .nav {
     background: #1db954;
     width: 100%;
+    min-width: 35rem;
+    position: -webkit-sticky;
+    position: sticky;
     padding: 1rem;
+    display: block;
     font-weight: bold;
     color: #fff;
 }

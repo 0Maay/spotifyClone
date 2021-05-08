@@ -12,10 +12,9 @@ const Song = ({ song }) => {
 	const { favoriteSongs, setFavoriteSongs } = useFavorites();
 
 	const addToFavoriteSongs = () => {
-		if (!favoriteSongs.includes(song)) {
+		if(favoriteSongs.find(el => el.id === song.id) === undefined)
 			setFavoriteSongs([...favoriteSongs, song]);
-		}
-		};
+	};
 	
 	const removeFromFavorites = () => {
 		setFavoriteSongs(favoriteSongs.filter((fs) => fs.id !== song.id));
@@ -37,8 +36,8 @@ const Song = ({ song }) => {
 			<div className={styles.buttons}>
 				<button className={styles.button} onClick={() => setCurrentSong(song)}><PlayArrowIcon/></button>
 				<button className={styles.button} 
-					onClick={ favoriteSongs.includes(song) ? removeFromFavorites : addToFavoriteSongs}>
-						{favoriteSongs.includes(song)
+					onClick={ favoriteSongs.find(el => el.id === song.id) ? removeFromFavorites : addToFavoriteSongs}>
+						{favoriteSongs.find(el => el.id === song.id)
 						? <FavoriteIcon/>
 						:<FavoriteBorderIcon/>}
 				</button>
